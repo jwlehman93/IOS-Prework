@@ -19,14 +19,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var totalStatic: UILabel!
     //initialize NSUser defaults for settings
     let defaults = NSUserDefaults.standardUserDefaults()
+    var currencySymbol = NSLocale.currentLocale().objectForKey(NSLocaleCurrencySymbol) as! String
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         //set intial tip and total labels to $0
-        tipLabel.text = "$0.00"
-        totalLabel.text = "$0.00"
+        tipLabel.text = "\(currencySymbol)0.00"
+        totalLabel.text = "\(currencySymbol)0.00"
         /*check if time from previous close exists
           if so, checks if it has been greater than 
           10 mins and if not sets bill amount to
@@ -36,15 +37,9 @@ class ViewController: UIViewController {
             let prevMin = defaults.integerForKey("previousMin")
             let currentDate = NSDateComponents()
             let curMin = currentDate.minute
+            billField.placeholder = currencySymbol
             if(abs(prevMin - curMin )<10){
                 if(defaults.objectForKey("billAmount") != nil) {billField.text = defaults.stringForKey("billAmount")
-                    let billAmount = NSString(string:billField.text!).doubleValue
-                    let percentages = [0.18,0.22,0.25]
-                    let percentage = percentages[tipControl.selectedSegmentIndex]
-                    let tip = billAmount * percentage
-                    let total = billAmount + tip
-                    tipLabel.text = String(format:"%.2f",tip)
-                    totalLabel.text = String(format:"%.2f",total)
                 }
             }
         }
@@ -53,6 +48,7 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         billField.becomeFirstResponder()
     }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         var percentages = [0.18,0.22,0.25]
@@ -68,8 +64,14 @@ class ViewController: UIViewController {
             let billAmount = NSString(string:billField.text!).doubleValue
             let tip = billAmount * percentage
             let total = billAmount + tip
-            tipLabel.text = String(format:"$%.2f",tip)
-            totalLabel.text = String(format:"$%.2f",total)
+            let formatter = NSNumberFormatter()
+            formatter.numberStyle = .CurrencyStyle
+            let tipStr = formatter.stringFromNumber(tip)
+            let totalStr = formatter.stringFromNumber(total)
+            
+            tipLabel.text = tipStr!
+            totalLabel.text = totalStr!
+
         }
         /*check if index for color scheme exists
            then implement color scheme
@@ -123,20 +125,28 @@ class ViewController: UIViewController {
     }
 
     @IBAction func onEditingChanged(sender: AnyObject) {
-        /*updates text field and tip and total labels as things are type into it
+        /*updates text field and tip and total labels as things are typed into it. Also formats values for current locale
         */
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = .CurrencyStyle
         var tipPercentages = [0.18,0.22,0.25]
         let percentage = tipPercentages[tipControl.selectedSegmentIndex]
         let billAmount = NSString(string: billField.text!).doubleValue
         let tip = billAmount * percentage
         let total = billAmount + tip
-        tipLabel.text = String(format:"$%.2f",tip)
-        totalLabel.text = String(format:"$%.2f",total)
+        
+        let tipStr = formatter.stringFromNumber(tip)
+        let totalStr = formatter.stringFromNumber(total)
+        
+        tipLabel.text = tipStr!
+        totalLabel.text = totalStr!
     }
     
     @IBAction func onTap(sender: AnyObject) {
-        //push keyboard down when screen is clicked
+        //push keyboard down when screen is click?d
         view.endEditing(true)
+        currencySymbol = NSLocale.currentLocale().objectForKey(NSLocaleCurrencySymbol) as! String
+        billField.placeholder = currencySymbol
     }
 
  

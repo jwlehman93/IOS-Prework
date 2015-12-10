@@ -69,7 +69,6 @@
                                 </connections>
                             </segmentedControl>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="Ad9-fa-V6T" appends="YES" id="SQA-lg-p09"/>
@@ -84,9 +83,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="billField" destination="m7U-xu-mjR" id="fmN-66-ts5"/>
+                        <outlet property="sumBar" destination="A94-mD-asZ" id="hTv-pm-kEF"/>
                         <outlet property="tipControl" destination="bKn-N9-jW9" id="9ii-7T-MRJ"/>
                         <outlet property="tipLabel" destination="kWp-ND-Dwx" id="y6Z-yt-1ko"/>
+                        <outlet property="tipStatic" destination="wPf-sf-2ou" id="Kxa-n0-bRG"/>
                         <outlet property="totalLabel" destination="9nS-D3-Tde" id="Q6A-T6-WAk"/>
+                        <outlet property="totalStatic" destination="exW-xz-L74" id="rcN-bX-p8q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -125,11 +127,30 @@
                                     <action selector="onEditingChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Qg6-RM-Gbp"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color Scheme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lxJ-3c-58g">
+                                <rect key="frame" x="106" y="213" width="108" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="XPm-Wv-3Wd">
+                                <rect key="frame" x="15" y="270" width="291" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Light"/>
+                                    <segment title="Dark"/>
+                                </segments>
+                                <connections>
+                                    <action selector="onEditingChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="OXY-H2-PRN"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="Qbs-E0-Z6p"/>
                     <connections>
+                        <outlet property="colorSchemeControl" destination="XPm-Wv-3Wd" id="ELk-Ii-CGG"/>
                         <outlet property="tipControl" destination="P3W-rx-Vbm" id="a5Y-l4-KEp"/>
                     </connections>
                 </viewController>

@@ -9,8 +9,11 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
+    //initalize variables
+    @IBOutlet weak var colorSchemeControl: UISegmentedControl!
     @IBOutlet weak var tipControl: UISegmentedControl!
+    //intialize NSUserDefaults for settings
+    let defaults = NSUserDefaults.standardUserDefaults()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,11 +21,14 @@ class SettingsViewController: UIViewController {
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let defaults = NSUserDefaults.standardUserDefaults()
+        //update tip segment control if exists to correct setting
         if(defaults.objectForKey("tipIndex") != nil){
             tipControl.selectedSegmentIndex = defaults.integerForKey("tipIndex")
         }
-            
+        //update color scheme segment control if exists to correct setting
+        if(defaults.objectForKey("colorIndex") != nil) {
+            colorSchemeControl.selectedSegmentIndex = defaults.integerForKey("colorIndex")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,9 +36,10 @@ class SettingsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     override func viewWillDisappear(animated: Bool) {
+        //save default tip and color scheme settings
         super.viewWillDisappear(animated)
-        let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setInteger(tipControl.selectedSegmentIndex,forKey: "tipIndex")
+        defaults.setInteger(colorSchemeControl.selectedSegmentIndex, forKey:"colorIndex")
         defaults.synchronize()
         
     }

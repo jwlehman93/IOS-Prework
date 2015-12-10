@@ -32,8 +32,7 @@ class ViewController: UIViewController {
           10 mins and if not sets bill amount to
           saved amount if exists and updates tip and
           total label
-        */
-        if(defaults.objectForKey("previousMin") != nil) {
+        */if(defaults.objectForKey("previousMin") != nil) {
             let prevMin = defaults.integerForKey("previousMin")
             let currentDate = NSDateComponents()
             let curMin = currentDate.minute
@@ -50,7 +49,10 @@ class ViewController: UIViewController {
             }
         }
     }
-    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        billField.becomeFirstResponder()
+    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         var percentages = [0.18,0.22,0.25]
@@ -77,7 +79,15 @@ class ViewController: UIViewController {
             setColors(color)
         }
     }
-    
+    override func viewWillDisappear(animated: Bool) {
+        //saves bill amount and time of close
+        super.viewWillDisappear(animated)
+        defaults.setObject(billField.text, forKey: "billAmount")
+        let date = NSDateComponents()
+        defaults.setInteger(date.minute, forKey: "previousMin")
+        defaults.synchronize()
+    }
+
     func setColors(colorIndex : Int) {
         if(colorIndex == 1) {
             view.backgroundColor = UIColor.blackColor()
@@ -106,15 +116,7 @@ class ViewController: UIViewController {
         }
     }
 
-    override func viewWillDisappear(animated: Bool) {
-        //saves bill amount and time of close
-        super.viewWillDisappear(animated)
-        defaults.setObject(billField.text, forKey: "billAmount")
-        let date = NSDateComponents()
-        defaults.setInteger(date.minute, forKey: "previousMin")
-        defaults.synchronize()
-    }
-
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

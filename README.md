@@ -4,7 +4,7 @@
 
 Submitted by: **Jeremy Lehman**
 
-Time spent: **8** hours spent in total
+Time spent: **10** hours spent in total
 
 ## User Stories
 
@@ -22,6 +22,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [x] added dark/light color scheme
+- [x] use a slider instead of segmented control for tip percentage
 
 ## Video Walkthrough 
 

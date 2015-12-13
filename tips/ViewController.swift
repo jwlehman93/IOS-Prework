@@ -14,9 +14,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var billField: UITextField!
     @IBOutlet weak var tipLabel: UILabel!
+    @IBOutlet weak var tipPercentLabel: UILabel!
     @IBOutlet weak var sumBar: UIView!
     @IBOutlet weak var tipStatic: UILabel!
+    @IBOutlet weak var tipPercentageStatic: UILabel!
     @IBOutlet weak var totalStatic: UILabel!
+    @IBOutlet weak var tipSlider: UISlider!
     //initialize NSUser defaults for settings
     let defaults = NSUserDefaults.standardUserDefaults()
     var currencySymbol = NSLocale.currentLocale().objectForKey(NSLocaleCurrencySymbol) as! String
@@ -51,18 +54,16 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        var percentages = [0.18,0.22,0.25]
         /* check if default tip Percentage has been set
             if set, changes selected segment in main view
             and updates tip and total labels
-        */
-        if(defaults.objectForKey("tipIndex") != nil){
-            let index = defaults.integerForKey("tipIndex")
-            tipControl.selectedSegmentIndex = index
+        */if(defaults.objectForKey("tipPercent") != nil){
         
-            let percentage = percentages[tipControl.selectedSegmentIndex]
+            let percentage = defaults.floatForKey("tipPercent")/100
+            tipSlider.value = defaults.floatForKey("tipPercent")
+            tipPercentLabel.text = "\(defaults.integerForKey("tipPercent"))%"
             let billAmount = NSString(string:billField.text!).doubleValue
-            let tip = billAmount * percentage
+            let tip = billAmount * Double(percentage)
             let total = billAmount + tip
             let formatter = NSNumberFormatter()
             formatter.numberStyle = .CurrencyStyle
@@ -100,8 +101,11 @@ class ViewController: UIViewController {
             tipStatic.textColor = UIColor.greenColor()
             totalStatic.textColor = UIColor.greenColor()
             billField.backgroundColor = UIColor.darkGrayColor()
-            tipControl.backgroundColor = UIColor.darkGrayColor()
-            tipControl.tintColor = UIColor.greenColor()
+            tipPercentageStatic.textColor = UIColor.greenColor()
+            tipPercentLabel.textColor = UIColor.greenColor()
+            tipSlider.thumbTintColor = UIColor.darkGrayColor()
+            tipSlider.tintColor = UIColor.greenColor()
+           
             sumBar.backgroundColor = UIColor.greenColor()
         }
         else if(colorIndex == 0) {
@@ -112,8 +116,11 @@ class ViewController: UIViewController {
             totalLabel.textColor = UIColor.blackColor()
             totalStatic.textColor = UIColor.blackColor()
             billField.backgroundColor = UIColor.clearColor()
-            tipControl.backgroundColor = UIColor.whiteColor()
-            tipControl.tintColor = UIColor.blueColor()
+            tipPercentageStatic.textColor = UIColor.blackColor()
+            tipPercentLabel.textColor = UIColor.blackColor()
+            tipSlider.thumbTintColor =
+                nil
+            tipSlider.tintColor = self.view.tintColor
             sumBar.backgroundColor = UIColor.blackColor()
         }
     }
@@ -129,8 +136,7 @@ class ViewController: UIViewController {
         */
         let formatter = NSNumberFormatter()
         formatter.numberStyle = .CurrencyStyle
-        var tipPercentages = [0.18,0.22,0.25]
-        let percentage = tipPercentages[tipControl.selectedSegmentIndex]
+        let percentage = Double(tipSlider.value/100)
         let billAmount = NSString(string: billField.text!).doubleValue
         let tip = billAmount * percentage
         let total = billAmount + tip
@@ -147,6 +153,23 @@ class ViewController: UIViewController {
         view.endEditing(true)
         currencySymbol = NSLocale.currentLocale().objectForKey(NSLocaleCurrencySymbol) as! String
         billField.placeholder = currencySymbol
+    }
+    /*triggered when percent slider is changed.
+      updates all relevant labels
+    */
+    @IBAction func tipValueChanged(sender: UISlider) {
+        let currentValue = Int(sender.value)
+        tipPercentLabel.text = "\(currentValue)%"
+        let percentage = Double(currentValue)/100
+        let billAmount = NSString(string: billField.text!).doubleValue
+        let tip = billAmount * percentage
+        let total = billAmount + tip
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = .CurrencyStyle
+        let tipStr = formatter.stringFromNumber(tip)
+        let totalStr = formatter.stringFromNumber(total)
+        tipLabel.text = tipStr!
+        totalLabel.text = totalStr!
     }
 
  

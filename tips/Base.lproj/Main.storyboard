@@ -56,18 +56,27 @@
                                     <action selector="onEditingChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="2dh-0Q-zFU"/>
                                 </connections>
                             </textField>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="bKn-N9-jW9">
-                                <rect key="frame" x="9" y="363" width="291" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip Percentage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XXw-lg-GLm">
+                                <rect key="frame" x="96" y="380" width="116" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="18%"/>
-                                    <segment title="22%"/>
-                                    <segment title="25%"/>
-                                </segments>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" minValue="0.0" maxValue="50" id="xoS-3e-dk6">
+                                <rect key="frame" x="7" y="429" width="295" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="onEditingChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="c8w-ha-zu8"/>
+                                    <action selector="tipValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="7C5-9X-BFT"/>
                                 </connections>
-                            </segmentedControl>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wjn-3q-rB0">
+                                <rect key="frame" x="137" y="409" width="34" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <gestureRecognizers/>
                         <connections>
@@ -84,8 +93,10 @@
                     <connections>
                         <outlet property="billField" destination="m7U-xu-mjR" id="fmN-66-ts5"/>
                         <outlet property="sumBar" destination="A94-mD-asZ" id="hTv-pm-kEF"/>
-                        <outlet property="tipControl" destination="bKn-N9-jW9" id="9ii-7T-MRJ"/>
                         <outlet property="tipLabel" destination="kWp-ND-Dwx" id="y6Z-yt-1ko"/>
+                        <outlet property="tipPercentLabel" destination="wjn-3q-rB0" id="mSs-cA-QB9"/>
+                        <outlet property="tipPercentageStatic" destination="XXw-lg-GLm" id="9mu-iq-2CQ"/>
+                        <outlet property="tipSlider" destination="xoS-3e-dk6" id="7N5-Vg-6A6"/>
                         <outlet property="tipStatic" destination="wPf-sf-2ou" id="Kxa-n0-bRG"/>
                         <outlet property="totalLabel" destination="9nS-D3-Tde" id="Q6A-T6-WAk"/>
                         <outlet property="totalStatic" destination="exW-xz-L74" id="rcN-bX-p8q"/>
@@ -109,24 +120,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default Tip Percentage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Lo7-LH-7TL">
-                                <rect key="frame" x="62" y="95" width="197" height="21"/>
+                                <rect key="frame" x="62" y="88" width="197" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="P3W-rx-Vbm">
-                                <rect key="frame" x="15" y="146" width="291" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="18%"/>
-                                    <segment title="22%"/>
-                                    <segment title="25%"/>
-                                </segments>
-                                <connections>
-                                    <action selector="onEditingChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Qg6-RM-Gbp"/>
-                                </connections>
-                            </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color Scheme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lxJ-3c-58g">
                                 <rect key="frame" x="106" y="213" width="108" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -145,13 +144,29 @@
                                     <action selector="onEditingChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="OXY-H2-PRN"/>
                                 </connections>
                             </segmentedControl>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="50" id="git-DU-q9E">
+                                <rect key="frame" x="13" y="136" width="295" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="onValueChanged:" destination="nvm-Xm-cK7" eventType="valueChanged" id="0Y9-yA-nKp"/>
+                                    <action selector="tipValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="7WB-5k-L4S"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fA6-LI-JwP">
+                                <rect key="frame" x="141" y="117" width="38" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="Qbs-E0-Z6p"/>
                     <connections>
                         <outlet property="colorSchemeControl" destination="XPm-Wv-3Wd" id="ELk-Ii-CGG"/>
-                        <outlet property="tipControl" destination="P3W-rx-Vbm" id="a5Y-l4-KEp"/>
+                        <outlet property="tipPercentLabel" destination="fA6-LI-JwP" id="29z-1q-yP2"/>
+                        <outlet property="tipSlider" destination="git-DU-q9E" id="ttt-aY-FeO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9b1-fS-Vfh" userLabel="First Responder" sceneMemberID="firstResponder"/>

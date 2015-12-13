@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     //initialize all view components
+    @IBOutlet weak var calcView: UIView!
     @IBOutlet weak var tipControl: UISegmentedControl!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var billField: UITextField!
@@ -81,6 +82,7 @@ class ViewController: UIViewController {
             let color = defaults.integerForKey("colorIndex")
             setColors(color)
         }
+        //set positions of views
     }
     override func viewWillDisappear(animated: Bool) {
         //saves bill amount and time of close
@@ -93,7 +95,8 @@ class ViewController: UIViewController {
 
     func setColors(colorIndex : Int) {
         if(colorIndex == 1) {
-            view.backgroundColor = UIColor.blackColor()
+            view.backgroundColor = UIColor.darkGrayColor()
+            calcView.backgroundColor = UIColor.blackColor()
             // set all text colors to green
             billField.textColor = UIColor.greenColor()
             tipLabel.textColor = UIColor.greenColor()
@@ -110,6 +113,7 @@ class ViewController: UIViewController {
         }
         else if(colorIndex == 0) {
             view.backgroundColor = UIColor.whiteColor()
+            calcView.backgroundColor = UIColor.lightGrayColor()
             billField.textColor = UIColor.blackColor()
             tipLabel.textColor = UIColor.blackColor()
             tipStatic.textColor = UIColor.blackColor()

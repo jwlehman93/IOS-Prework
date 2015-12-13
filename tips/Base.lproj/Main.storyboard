@@ -24,7 +24,7 @@
                                 </connections>
                             </textField>
                             <view contentMode="scaleToFill" id="sup-c1-QAX">
-                                <rect key="frame" x="0.0" y="190" width="320" height="367"/>
+                                <rect key="frame" x="0.0" y="201" width="320" height="367"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wPf-sf-2ou">

@@ -83,6 +83,14 @@ class ViewController: UIViewController {
             setColors(color)
         }
         //set positions of views
+        if(billField.text?.characters.count == 0){
+            calcView.frame = CGRectMake(0,self.view.frame.maxY, calcView.frame.maxX, calcView.frame.maxY)
+            billField.center = self.view.center
+        }
+        else {
+            calcView.frame = CGRectMake(0,200,self.view.frame.maxX,400)
+            billField.center = CGPointMake(self.view.center.x,120)
+        }
     }
     override func viewWillDisappear(animated: Bool) {
         //saves bill amount and time of close
@@ -150,6 +158,19 @@ class ViewController: UIViewController {
         
         tipLabel.text = tipStr!
         totalLabel.text = totalStr!
+        if(billField.text?.characters.count == 1) {
+            UIView.animateWithDuration(0.4,animations: {
+                self.calcView.frame = CGRectMake(0,200,self.view.frame.maxX,400)
+                self.billField.center = CGPointMake(self.view.center.x,120)
+
+            })
+        }
+        else if(billField.text?.characters.count == 0) {
+            UIView.animateWithDuration(0.4, animations:{
+                self.calcView.frame = CGRectMake(0,self.view.frame.maxY, self.calcView.frame.maxX, self.calcView.frame.maxY)
+                self.billField.center = self.view.center
+            })
+        }
     }
     
     @IBAction func onTap(sender: AnyObject) {
